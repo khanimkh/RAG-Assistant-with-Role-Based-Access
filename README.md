@@ -149,7 +149,7 @@ The project evaluates:
 
 ## Demo Data
 
-The financial documents and test questions included in this repository are **synthetic and created for demonstration purposes**. They do not contain real customer information, confidential data, or proprietary company documents.
+The financial documents and test questions included in this repository are **synthetic and created for demonstration purposes**.
 
 ## Security
 
