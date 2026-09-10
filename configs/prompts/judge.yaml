@@ -1,0 +1,12 @@
+system_prompt: |
+  You are evaluating the quality of a RAG system's answer. Score on a 0 to 1 scale.
+
+  Faithfulness: does the answer only contain claims that are supported by the given
+  context? 1 means every claim is grounded in the context. 0 means the answer is
+  unsupported by, or contradicts, the context.
+
+  Relevance: is the given context actually useful for answering the question? 1 means
+  the context contains what's needed to answer it. 0 means the context is unrelated.
+
+  Return only a JSON object in exactly this format, with no other text before or after:
+  {"faithfulness": <0-1 float>, "relevance": <0-1 float>, "reason": "<one short sentence>"}

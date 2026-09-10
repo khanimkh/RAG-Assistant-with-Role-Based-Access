@@ -1,0 +1,140 @@
+{
+  "aggregate": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 1.0,
+    "avg_latency": 2.558682680130005
+  },
+  "per_question": [
+    {
+      "id": 1,
+      "question": "Can you provide an example of successful AMI deployment on how it was communicated to customers via My Account? Need examples.",
+      "role": "general",
+      "answerable": true,
+      "answer": "The provided context does not contain specific examples of successful Advanced Metering Infrastructure (AMI) deployment or how it was communicated to customers via \"My Account.\" \n\nHowever, it does mention that utilities used multiple communication channels, including web portals, to educate customers and notify them about various aspects of smart meter deployments (Source: SG-CustParticipation-Sept2014.pdf, p. 4). This suggests that a web portal like \"My Account\" could be part of the communication strategy, but no specific examples or details are provided.\n\nTherefore, while the context indicates that web portals are utilized for customer communication, it does not provide a concrete example of AMI deployment communication through \"My Account.\"",
+      "sources": [
+        "SG-CustParticipation-Sept2014.pdf, p.6",
+        "SG-CustParticipation-Sept2014.pdf, p.4"
+      ],
+      "retrieved_sources": [
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf"
+      ],
+      "latency": 2.3601980209350586,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": false,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The answer accurately reflects the context and explains the lack of specific examples while confirming the relevance of the communication methods mentioned."
+    },
+    {
+      "id": 2,
+      "question": "Regarding high bill alerts for energy savings, are any utilities using high bill alerts as a DSM program? If yes, please provide contact names at those utilities.",
+      "role": "general",
+      "answerable": true,
+      "answer": "The context does not provide information on whether any utilities are using high bill alerts specifically as a Demand-Side Management (DSM) program. It mentions a pilot program by Central Maine Power (CMP) that includes bill alerts, but it does not classify this program as a DSM initiative or provide contact names at any utilities.\n\nTherefore, I cannot confirm if any utilities are using high bill alerts as a DSM program or provide contact names.",
+      "sources": [
+        "SG-CustParticipation-Sept2014.pdf, p.10",
+        "SG-CustParticipation-Sept2014.pdf, p.14",
+        "SG-CustParticipation-Sept2014.pdf, p.19"
+      ],
+      "retrieved_sources": [
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf"
+      ],
+      "latency": 1.2606146335601807,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": false,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The answer accurately reflects the context and addresses the question regarding high bill alerts and DSM programs."
+    },
+    {
+      "id": 3,
+      "question": "We have a midstream lighting program. I'd like to know about research that has been done on percent market saturation for when you should transition to market transformation program and what is the saturation level when you should sunset a program. Also, what are the pros/cons for determining ending incentives by distributor vs. across the region.",
+      "role": "general",
+      "answerable": true,
+      "answer": "1. **Research on percent market saturation for transitioning to a market transformation program**: The provided context does not contain specific research or data regarding the percent market saturation that would indicate when to transition from a midstream lighting program to a market transformation program. \n\n2. **Saturation level for sunsetting a program**: The documents do not provide information on the specific saturation level at which a program should be sunset.\n\n3. **Pros/cons for determining ending incentives by distributor vs. across the region**: The context does not discuss the pros and cons of determining the ending of incentives by distributor compared to a regional approach.\n\nIn summary, the documents do not provide information on any of the requested parts regarding market saturation, sunsetting programs, or the pros and cons of incentive determination methods.",
+      "sources": [
+        "LBR_2017-LED-Takeover.pdf, p.7",
+        "LBR_2017-LED-Takeover.pdf, p.8"
+      ],
+      "retrieved_sources": [
+        "LBR_2017-LED-Takeover.pdf",
+        "LBR_2017-LED-Takeover.pdf",
+        "LBR_2017-LED-Takeover.pdf"
+      ],
+      "latency": 2.26171612739563,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": false,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The answer accurately reflects the lack of information in the context regarding the questions asked."
+    },
+    {
+      "id": 4,
+      "question": "What factors have helped increase residential LED adoption, and how have utility incentives affected LED market share?",
+      "role": "general",
+      "answerable": true,
+      "answer": "To answer your question, I will break it down into its individual parts:\n\n1. **What factors have helped increase residential LED adoption?**\n2. **How have utility incentives affected LED market share?**\n\n### 1. Factors that have helped increase residential LED adoption:\nThe documents indicate that several factors have contributed to the increase in residential LED adoption:\n- Increased availability of LED lighting.\n- Discounted prices of LED bulbs.\n- Growing awareness of the benefits of LED lighting (Source: LBR_2017-LED-Takeover.pdf, p. 8).\n\n### 2. How utility incentives have affected LED market share:\nUtility programs have played a pivotal role in increasing the market share of LED lighting by:\n- Reducing the upfront cost of ENERGY STAR LED lighting.\n- Helping to speed up the adoption of quality LED lighting (Source: LBR_2017-LED-Takeover.pdf, p. 7).\n- The percentage of LED lamp sales has been observed to increase in states based on utility program spending, with an increase of 5-10% noted (Source: LBR_2017-LED-Takeover.pdf, p. 7).\n\n### Summary:\nIn summary, factors such as increased availability, discounted prices, and growing awareness have helped increase residential LED adoption. Utility incentives have significantly affected LED market share by reducing upfront costs and increasing sales percentages based on program spending. \n\nNo additional information is available regarding specific utility programs or detailed statistics beyond what has been provided.",
+      "sources": [
+        "LBR_2017-LED-Takeover.pdf, p.7",
+        "LBR_2017-LED-Takeover.pdf, p.8"
+      ],
+      "retrieved_sources": [
+        "LBR_2017-LED-Takeover.pdf",
+        "LBR_2017-LED-Takeover.pdf",
+        "LBR_2017-LED-Takeover.pdf"
+      ],
+      "latency": 3.109616756439209,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": false,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1.0,
+      "relevance": 1.0,
+      "judge_reason": "The answer accurately reflects the context and addresses the question using relevant information."
+    },
+    {
+      "id": 5,
+      "question": "What quality assurance and quality control practices can energy-efficiency programs use to ensure contractors deliver work that meets required standards?",
+      "role": "general",
+      "answerable": true,
+      "answer": "The question can be broken down into two parts: \n\n1. What quality assurance practices can energy-efficiency programs use?\n2. What quality control practices can energy-efficiency programs use?\n\n**Quality Assurance Practices:**\nThe documents provide several quality assurance practices that energy-efficiency programs can implement, including:\n- Contractor training, qualifications, certification, and mentoring (Source: 0193-000036.pdf, p. 1).\n- Annual contractor review (Source: 0193-000036.pdf, p. 1).\n- Intermittent contractor training as the program evolves (Source: 0193-000036.pdf, p. 1).\n\n**Quality Control Practices:**\nThe documents also outline quality control practices, such as:\n- Test-out procedures (Source: 0193-000036.pdf, p. 1).\n- Site visit or desk review of every job (Source: 0193-000036.pdf, p. 1).\n- Exit surveys to gather feedback (Source: 0193-000036.pdf, p. 1).\n- Implementation of a probation/debarment policy (Source: 0193-000036.pdf, p. 1).\n\nThe documents emphasize that effective contractor training and a comprehensive QA/QC process are essential for creating a competent contractor pool and ensuring program success (Source: 0193-000036.pdf, p. 2; p. 4). \n\nIn summary, the documents provide a range of quality assurance and quality control practices that energy-efficiency programs can use, but do not specify additional practices beyond those listed.",
+      "sources": [
+        "0193-000036.pdf, p.1",
+        "0193-000036.pdf, p.4",
+        "0193-000036.pdf, p.2"
+      ],
+      "retrieved_sources": [
+        "0193-000036.pdf",
+        "0193-000036.pdf",
+        "0193-000036.pdf"
+      ],
+      "latency": 3.8012678623199463,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": false,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The answer accurately reflects the quality assurance and quality control practices outlined in the context."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+.env
+__pycache__/
+*.pyc
+vector_store/
+vector_store_baseline/
+vector_store_*/
+.pytest_cache/
+data/.ingestion_manifest.json
+*/ingestion_manifest.json
+

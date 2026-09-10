@@ -1,0 +1,38 @@
+services:
+  rag-app:
+    build:
+      context: .
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      MLFLOW_TRACKING_URI: sqlite:////app/mlruns/mlflow.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./vector_store:/app/vector_store
+      - ./mlruns:/app/mlruns
+      - ./evaluation_results:/app/evaluation_results
+    restart: unless-stopped
+
+  mlflow:
+    build:
+      context: .
+    environment:
+      MLFLOW_ALLOW_FILE_STORE: "true"
+      MLFLOW_TRACKING_URI: sqlite:////app/mlruns/mlflow.db
+    command:
+      - mlflow
+      - ui
+      - --host
+      - 0.0.0.0
+      - --port
+      - "5000"
+      - --backend-store-uri
+      - sqlite:////app/mlruns/mlflow.db
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlruns:/app/mlruns
+    restart: unless-stopped

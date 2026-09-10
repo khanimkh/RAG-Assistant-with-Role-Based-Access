@@ -1,0 +1,12 @@
+.env
+.git
+.gitignore
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+vector_store/
+vector_store_*/
+evaluation_results/
+*.log

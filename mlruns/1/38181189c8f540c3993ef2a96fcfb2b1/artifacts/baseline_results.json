@@ -1,0 +1,130 @@
+{
+  "aggregate": {
+    "faithfulness": 1.0,
+    "relevance": 0.8,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 0.6,
+    "avg_latency": 1.4147862911224365
+  },
+  "per_question": [
+    {
+      "id": 1,
+      "question": "Can you provide an example of successful AMI deployment on how it was communicated to customers via My Account? Need examples.",
+      "role": "general",
+      "answerable": true,
+      "answer": "I don't have enough information in the provided documents to answer this question.",
+      "sources": [],
+      "retrieved_sources": [
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf"
+      ],
+      "latency": 2.510979413986206,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": true,
+      "no_answer_correct": 0.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The context discusses customer notification methods and education strategies relevant to AMI deployment."
+    },
+    {
+      "id": 2,
+      "question": "Regarding high bill alerts for energy savings, are any utilities using high bill alerts as a DSM program? If yes, please provide contact names at those utilities.",
+      "role": "general",
+      "answerable": true,
+      "answer": "I don't have enough information in the provided documents to answer this question.",
+      "sources": [],
+      "retrieved_sources": [
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf",
+        "SG-CustParticipation-Sept2014.pdf"
+      ],
+      "latency": 0.7404255867004395,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": true,
+      "no_answer_correct": 0.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The context discusses high bill alerts and utilities, but does not provide specific contact names."
+    },
+    {
+      "id": 3,
+      "question": "What is the current price of Bitcoin?",
+      "role": "general",
+      "answerable": false,
+      "answer": "I don't have enough information in the provided documents to answer this question.",
+      "sources": [],
+      "retrieved_sources": [
+        "LBR_2017-LED-Takeover.pdf",
+        "VALUIN~1.PDF",
+        "61620.pdf"
+      ],
+      "latency": 0.21062684059143066,
+      "precision_at_k": null,
+      "recall_at_k": null,
+      "reciprocal_rank": null,
+      "is_no_answer": true,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1,
+      "relevance": 0,
+      "judge_reason": "The context does not provide any information about Bitcoin prices."
+    },
+    {
+      "id": 4,
+      "question": "What factors have helped increase residential LED adoption, and how have utility incentives affected LED market share?",
+      "role": "general",
+      "answerable": true,
+      "answer": "The factors that have helped increase residential LED adoption include increased availability, discounted prices, and growing awareness of the benefits of LED lighting. Utility program activity has played a pivotal role in reducing the upfront cost of ENERGY STAR LED lighting, which has helped speed up the adoption of quality LED lighting. As a result, the percentage of LED lamp sales has increased in states with utility program spending, showing a correlation between utility incentives and LED market share.",
+      "sources": [
+        "LBR_2017-LED-Takeover.pdf, p.7",
+        "LBR_2017-LED-Takeover.pdf, p.8"
+      ],
+      "retrieved_sources": [
+        "LBR_2017-LED-Takeover.pdf",
+        "LBR_2017-LED-Takeover.pdf",
+        "LBR_2017-LED-Takeover.pdf"
+      ],
+      "latency": 1.6755468845367432,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": false,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The answer accurately reflects the claims made in the context regarding factors influencing LED adoption and the impact of utility incentives."
+    },
+    {
+      "id": 5,
+      "question": "What quality assurance and quality control practices can energy-efficiency programs use to ensure contractors deliver work that meets required standards?",
+      "role": "general",
+      "answerable": true,
+      "answer": "Energy-efficiency programs can use the following quality assurance and quality control practices to ensure contractors deliver work that meets required standards:\n\n1. Contractor training, qualifications, certification, and mentoring.\n2. Contractor agreement.\n3. Test-out procedures.\n4. Site visit or desk review of every job.\n5. Probation/debarment policy.\n6. Exit survey.\n7. Annual contractor review.\n8. Intermittent contractor training as the program evolves.\n9. Certificate of completion.\n\nImplementing these practices concurrently is essential for program success, from contractor selection to customer feedback.",
+      "sources": [
+        "0193-000036.pdf, p.1",
+        "0193-000036.pdf, p.4",
+        "0193-000036.pdf, p.2"
+      ],
+      "retrieved_sources": [
+        "0193-000036.pdf",
+        "0193-000036.pdf",
+        "0193-000036.pdf"
+      ],
+      "latency": 1.9363527297973633,
+      "precision_at_k": 1.0,
+      "recall_at_k": 1.0,
+      "reciprocal_rank": 1.0,
+      "is_no_answer": false,
+      "no_answer_correct": 1.0,
+      "faithfulness": 1,
+      "relevance": 1,
+      "judge_reason": "The answer accurately reflects the quality assurance and quality control practices outlined in the context."
+    }
+  ]
+}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E Source RAG Assistant</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 16px; color: #1a1a1a; }
+  h1 { font-size: 1.4rem; }
+  .hidden { display: none !important; }
+
+  /* --- login screen --- */
+  #login-screen { max-width: 340px; margin: 80px auto; }
+  #login-screen input { width: 100%; box-sizing: border-box; padding: 8px; margin-bottom: 10px; font-size: 1rem; }
+  #login-error { color: #b00020; font-size: 0.9rem; margin-bottom: 8px; min-height: 1.2em; }
+
+  /* --- app header --- */
+  #app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  #whoami { font-size: 0.9rem; color: #555; }
+  #logout-btn { background: none; border: 1px solid #ccc; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+
+  /* --- tabs --- */
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid #ddd; }
+  .tab-button { padding: 8px 16px; border: none; background: none; cursor: pointer; font-size: 1rem; color: #666; }
+  .tab-button.active { color: #1a1a1a; border-bottom: 2px solid #1a1a1a; font-weight: 600; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  textarea, select, input[type=file], input[type=text] { width: 100%; box-sizing: border-box; padding: 8px; margin-bottom: 10px; font-size: 1rem; }
+  textarea { height: 80px; resize: vertical; }
+  button.submit { padding: 8px 20px; font-size: 1rem; cursor: pointer; }
+  #answer, #sources, #upload-result { margin-top: 16px; padding: 12px; background: #f7f7f7; border-radius: 6px; white-space: pre-wrap; }
+  #sources { font-size: 0.85rem; color: #555; }
+  .hint { font-size: 0.85rem; color: #777; margin-top: -4px; margin-bottom: 12px; }
+
+  #sources strong {display: block;margin-bottom: 8px;color: #333;}
+
+  #sources ol {margin: 0;padding-left: 24px;}
+
+#sources li {
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+  /* --- documents table --- */
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+  td select { width: auto; margin: 0; padding: 3px; }
+  .row-btn { padding: 4px 10px; font-size: 0.85rem; cursor: pointer; margin-left: 4px; }
+  .danger { color: #b00020; }
+</style>
+</head>
+<body>
+
+<!-- ======================= LOGIN SCREEN ======================= -->
+<div id="login-screen">
+  <h1>E Source RAG Assistant</h1>
+  <div id="login-error"></div>
+  <label for="login-username">Username</label>
+  <input type="text" id="login-username">
+  <label for="login-password">Password</label>
+  <input type="password" id="login-password">
+  <button class="submit" onclick="login()">Log in</button>
+  <div class="hint">
+    Accounts are created locally with <code>python scripts/add_user.py</code>,
+    not through this form.
+  </div>
+</div>
+
+<!-- ======================== MAIN APP ========================== -->
+<div id="app-screen" class="hidden">
+
+  <div id="app-header">
+    <h1>E Source RAG Assistant</h1>
+    <div>
+      <span id="whoami"></span>
+      <button id="logout-btn" onclick="logout()">Log out</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-button active" data-tab="ask" onclick="showTab('ask')">Ask a question</button>
+    <button class="tab-button hidden" data-tab="upload" data-admin-only onclick="showTab('upload')">Upload documents</button>
+    <button class="tab-button hidden" data-tab="documents" data-admin-only onclick="showTab('documents')">Manage documents</button>
+  </div>
+
+  <!-- ---- Ask tab ---- -->
+  <div id="ask" class="tab-panel active">
+    <label for="question">Question</label>
+    <textarea id="question" placeholder="e.g. Are any utilities using high bill alerts as a DSM program?"></textarea>
+
+    <button class="submit" onclick="askQuestion()">Ask</button>
+
+    <div id="answer" class="hidden"></div>
+    <div id="sources" class="hidden"></div>
+  </div>
+
+  <!-- ---- Upload tab (admin only) ---- -->
+  <div id="upload" class="tab-panel">
+    <label for="file">Document (.pdf, .md, .markdown, .txt)</label>
+    <input type="file" id="file" accept=".pdf,.md,.markdown,.txt">
+    <div class="hint">
+      Uploaded documents always default to "general" access. Use the
+      "Manage documents" tab to raise a specific document's access level.
+    </div>
+
+    <button class="submit" onclick="uploadFile()">Upload &amp; ingest</button>
+
+    <div id="upload-result" class="hidden"></div>
+  </div>
+
+  <!-- ---- Documents tab (admin only) ---- -->
+  <div id="documents" class="tab-panel">
+    <button class="submit" onclick="loadDocuments()">Refresh list</button>
+    <table id="documents-table">
+      <thead>
+        <tr><th>Filename</th><th>Access level</th><th>Uploaded by</th><th></th></tr>
+      </thead>
+      <tbody id="documents-body"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+// Kept in memory only, not localStorage/sessionStorage - a page refresh
+// logs the user out. See the comment where this file is generated for why.
+let authToken = null;
+let currentRole = null;
+let currentUsername = null;
+
+// ---------- auth ----------
+
+async function login() {
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errorEl = document.getElementById('login-error');
+  errorEl.textContent = '';
+
+  if (!username || !password) return;
+
+  try {
+    const resp = await fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await resp.json();
+
+    if (!resp.ok) {
+      errorEl.textContent = data.detail || 'Login failed.';
+      return;
+    }
+
+    authToken = data.access_token;
+    currentRole = data.role;
+    currentUsername = username;
+
+    enterApp();
+  } catch (err) {
+    errorEl.textContent = 'Request failed: ' + err;
+  }
+}
+
+function logout() {
+  authToken = null;
+  currentRole = null;
+  currentUsername = null;
+  document.getElementById('login-username').value = '';
+  document.getElementById('login-password').value = '';
+  document.getElementById('question').value = '';
+  document.getElementById('answer').textContent = '';
+  document.getElementById('answer').classList.add('hidden');
+  document.getElementById('sources').textContent = '';
+  document.getElementById('sources').classList.add('hidden');
+  document.getElementById('app-screen').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+
+function enterApp() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('app-screen').classList.remove('hidden');
+  document.getElementById('whoami').textContent = `Logged in as ${currentUsername} (${currentRole})`;
+
+  // Role-driven tab visibility: admin-only tabs simply don't render for
+  // anyone else, rather than rendering disabled.
+  const isAdmin = currentRole === 'admin';
+  document.querySelectorAll('[data-admin-only]').forEach(el => {
+    el.classList.toggle('hidden', !isAdmin);
+  });
+
+  showTab('ask');
+  if (isAdmin) loadDocuments();
+}
+
+// Wrapper that attaches the Authorization header to every authenticated
+// call, and forces a logout if the token was rejected (expired/invalid) -
+// centralizes both concerns instead of repeating them in every function.
+async function authFetch(url, options = {}) {
+  options.headers = options.headers || {};
+  options.headers['Authorization'] = 'Bearer ' + authToken;
+
+  const resp = await fetch(url, options);
+  if (resp.status === 401) {
+    logout();
+  }
+  return resp;
+}
+
+// ---------- tabs ----------
+
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-button').forEach(el => el.classList.remove('active'));
+  document.getElementById(name).classList.add('active');
+  document.querySelector(`.tab-button[data-tab="${name}"]`).classList.add('active');
+}
+
+// ---------- ask ----------
+function escapeHtml(text) {
+  const element = document.createElement('div');
+  element.textContent = text;
+  return element.innerHTML;
+}
+
+async function askQuestion() {
+  const question = document.getElementById('question').value.trim();
+  const answerEl = document.getElementById('answer');
+  const sourcesEl = document.getElementById('sources');
+
+  if (!question) return;
+
+  answerEl.classList.remove('hidden');
+  answerEl.textContent = 'Thinking...';
+  sourcesEl.classList.add('hidden');
+
+  try {
+    const resp = await authFetch('/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question })
+    });
+    const data = await resp.json();
+
+    if (!resp.ok) {
+      answerEl.textContent = 'Error: ' + (data.detail || resp.statusText);
+      return;
+    }
+
+    answerEl.textContent = data.answer;
+    if (data.sources && data.sources.length) {
+      sourcesEl.classList.remove('hidden');
+      sourcesEl.innerHTML =
+       '<strong>Sources</strong>' + '<ol>' + data.sources.map(source => `<li>${escapeHtml(source)}</li>`).join('') + '</ol>';
+    }
+  } catch (err) {
+    answerEl.textContent = 'Request failed: ' + err;
+  }
+}
+
+// ---------- upload ----------
+
+async function uploadFile() {
+  const fileInput = document.getElementById('file');
+  const resultEl = document.getElementById('upload-result');
+
+  if (!fileInput.files.length) return;
+
+  const formData = new FormData();
+  formData.append('file', fileInput.files[0]);
+
+  resultEl.classList.remove('hidden');
+  resultEl.textContent = 'Uploading and ingesting...';
+
+  try {
+    const resp = await authFetch('/upload', { method: 'POST', body: formData });
+    const data = await resp.json();
+
+    if (!resp.ok) {
+      resultEl.textContent = 'Error: ' + (data.detail || resp.statusText);
+      return;
+    }
+
+    resultEl.textContent = JSON.stringify(data, null, 2);
+    loadDocuments();
+  } catch (err) {
+    resultEl.textContent = 'Upload failed: ' + err;
+  }
+}
+
+// ---------- document management ----------
+
+const ACCESS_LEVELS = ['general', 'admin'];
+
+async function loadDocuments() {
+  const tbody = document.getElementById('documents-body');
+  tbody.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+
+  try {
+    const resp = await authFetch('/documents');
+    const docs = await resp.json();
+
+    if (!resp.ok) {
+      tbody.innerHTML = `<tr><td colspan="4">Error: ${docs.detail || resp.statusText}</td></tr>`;
+      return;
+    }
+
+    if (!docs.length) {
+      tbody.innerHTML = '<tr><td colspan="4">No documents ingested yet.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = '';
+    docs.forEach(doc => {
+      const row = document.createElement('tr');
+
+      const levelOptions = ACCESS_LEVELS
+        .map(l => `<option value="${l}" ${l === doc.access_level ? 'selected' : ''}>${l}</option>`)
+        .join('');
+
+      row.innerHTML = `
+        <td>${doc.filename}</td>
+        <td>
+          <select id="level-${doc.filename}">${levelOptions}</select>
+          <button class="row-btn" onclick="saveAccessLevel('${doc.filename}')">Save</button>
+        </td>
+        <td>${doc.uploaded_by || '(manually placed in data/docs/)'}</td>
+        <td><button class="row-btn danger" onclick="deleteDocument('${doc.filename}')">Delete</button></td>
+      `;
+      tbody.appendChild(row);
+    });
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="4">Request failed: ${err}</td></tr>`;
+  }
+}
+
+async function saveAccessLevel(filename) {
+  const newLevel = document.getElementById(`level-${filename}`).value;
+  try {
+    const resp = await authFetch(`/documents/${encodeURIComponent(filename)}/access`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ access_level: newLevel })
+    });
+    if (!resp.ok) {
+      const data = await resp.json();
+      alert('Error: ' + (data.detail || resp.statusText));
+      return;
+    }
+    loadDocuments();
+  } catch (err) {
+    alert('Request failed: ' + err);
+  }
+}
+
+async function deleteDocument(filename) {
+  if (!confirm(`Delete "${filename}"? This removes it from the vector store and disk.`)) return;
+
+  try {
+    const resp = await authFetch(`/documents/${encodeURIComponent(filename)}`, { method: 'DELETE' });
+    if (!resp.ok) {
+      const data = await resp.json();
+      alert('Error: ' + (data.detail || resp.statusText));
+      return;
+    }
+    loadDocuments();
+  } catch (err) {
+    alert('Request failed: ' + err);
+  }
+}
+</script>
+
+</body>
+</html>

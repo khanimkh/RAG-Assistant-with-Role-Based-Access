@@ -1,0 +1,29 @@
+{
+  "top_k_3": {
+    "faithfulness": 1.0,
+    "relevance": 0.8,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 1.0,
+    "avg_latency": 2.859912872314453
+  },
+  "top_k_5": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 1.0,
+    "avg_latency": 3.665443468093872
+  },
+  "top_k_8": {
+    "faithfulness": 0.9199999999999999,
+    "relevance": 0.9400000000000001,
+    "precision_at_k": 0.95,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 1.0,
+    "avg_latency": 4.037718391418457
+  }
+}

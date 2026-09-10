@@ -1,0 +1,31 @@
+questions:
+- id: 1
+  question: How did Northstar Community Bank communicate the launch of its redesigned
+    My Account portal, and what information could customers see on the dashboard?
+  expected_sources:
+  - financial_services_customer_engagement.pdf
+  answerable: true
+- id: 2
+  question: How did the Financial Wellness Pilot use high-spend and balance alerts
+    to help customers manage their finances?
+  expected_sources:
+  - financial_services_customer_engagement.pdf
+  answerable: true
+- id: 3
+  question: Which communication channels were available to customers, and why did
+    the bank use a multi-channel strategy?
+  expected_sources:
+  - financial_services_customer_engagement.pdf
+  answerable: true
+- id: 4
+  question: What percentage of surveyed pilot participants said the alerts helped
+    them notice spending earlier in the month?
+  expected_sources:
+  - financial_services_customer_engagement.pdf
+  answerable: true
+- id: 5
+  question: What practices did the bank use to protect sensitive financial information
+    in email and SMS notifications?
+  expected_sources:
+  - financial_services_customer_engagement.pdf
+  answerable: true

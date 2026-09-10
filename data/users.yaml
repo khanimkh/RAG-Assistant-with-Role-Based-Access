@@ -1,0 +1,7 @@
+users:
+  User_admin:
+    password_hash: $2b$12$JRSf.mSenoIiaDj/gf9ge.eEJiHvgPuHur7ft1Hcwigk8uDQIegSe
+    role: admin
+  User_employer:
+    password_hash: $2b$12$BXQiUsPdy23uqx8sUqHQieYtTMMRuaTGK4I8zh2z2WhENNZOf6nMy
+    role: general

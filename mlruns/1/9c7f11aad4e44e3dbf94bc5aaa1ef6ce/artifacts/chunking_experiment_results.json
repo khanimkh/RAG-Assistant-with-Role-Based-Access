@@ -1,0 +1,29 @@
+{
+  "chunk_500_50": {
+    "faithfulness": 1.0,
+    "relevance": 0.8,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 0.6,
+    "avg_latency": 1.2204123973846435
+  },
+  "chunk_800_100": {
+    "faithfulness": 0.8,
+    "relevance": 0.8,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 0.4,
+    "avg_latency": 0.9882622241973877
+  },
+  "chunk_1000_150": {
+    "faithfulness": 1.0,
+    "relevance": 0.8,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 0.6,
+    "avg_latency": 1.2693022727966308
+  }
+}

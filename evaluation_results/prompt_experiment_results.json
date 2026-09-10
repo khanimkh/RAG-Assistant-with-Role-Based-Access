@@ -1,0 +1,38 @@
+{
+  "v1": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 0.4,
+    "avg_latency": 1.4428035259246825
+  },
+  "v2": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 0.4,
+    "avg_latency": 1.4592697620391846
+  },
+  "v3": {
+    "faithfulness": 0.9800000000000001,
+    "relevance": 0.8,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 1.0,
+    "avg_latency": 2.3985328674316406
+  },
+  "v4": {
+    "faithfulness": 1.0,
+    "relevance": 1.0,
+    "precision_at_k": 1.0,
+    "recall_at_k": 1.0,
+    "mrr": 1.0,
+    "no_answer_accuracy": 1.0,
+    "avg_latency": 2.5976798057556154
+  }
+}
