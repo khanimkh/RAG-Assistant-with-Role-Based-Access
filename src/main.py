@@ -34,7 +34,7 @@ from src.api.routes import router
 #   wiring code to find it.
 # ============================================================================
 
-app = FastAPI(title="E Source RAG Assistant")
+app = FastAPI(title="RAG Assistant")
 
 app.include_router(router)
 
